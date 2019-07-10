@@ -6,8 +6,11 @@ const Url = require('../models/url')
 
 // POST /api/url/shorten
 router.post('/shorten', async (req, res) => {
+  // get longUrl from the body
   const { longUrl } = req.body
-  const baseUrl = `http://localhost:${ process.env.PORT }`
+
+  // create baseUrl
+  const baseUrl = `${ req.protocol }://${ req.hostname }:${ process.env.PORT }`
 
   // respond 401 if url is invalid
   if (!validUrl.isUri(baseUrl)) return res.status(401).json('Invalid Base Url')
