@@ -8,6 +8,9 @@ connectToDB(process.env.MONGO_URI)
 
 app.use(express.json())
 
-const { PORT } = process.env.PORT || 3000
+app.use('/', require('./routes/index'))
+app.use('/api/url', require('./routes/url'))
 
-app.listen(PORT, () => `Server on port ${ PORT }.`)
+const { PORT } = process.env || 3000
+
+app.listen(PORT, () => console.log(`Server on port ${ PORT }.`))
